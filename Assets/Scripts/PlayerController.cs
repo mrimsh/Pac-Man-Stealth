@@ -83,4 +83,11 @@ public class PlayerController : MonoBehaviour
 //		
 //		rigidbody.velocity = transform.localRotation * currentDirection * 200f * Time.fixedDeltaTime;
 	}
+	
+	void OnTriggerEnter (Collider other)
+	{
+		other.GetComponentInChildren<Renderer> ().material.color = Color.white;
+		audio.Play ();
+		Destroy (other.gameObject, 0.2f);
+	}
 }
