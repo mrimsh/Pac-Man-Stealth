@@ -9,7 +9,6 @@ public class LightEffects : MonoBehaviour
 	public float blinkDuration = 0.3f;
 	public List<LightBlink> blinks;
 	private int currentEffect;
-	private LightEffect currrentEffect = LightEffect.none;
 	
 	private enum LightEffect
 	{
@@ -46,7 +45,6 @@ public class LightEffects : MonoBehaviour
 				}
 				lastMinimumChance += blinks [i].chance;
 			}
-			Debug.Log ("Generated effect: " + blinks [currentEffect].name);
 			lastEffectChangeTime = Time.time;
 		} else {
 			if (Time.time > lastBlinkTime + blinks [currentEffect].blinkDuration) {
@@ -57,7 +55,6 @@ public class LightEffects : MonoBehaviour
 					light.intensity = 0.5f;
 					light.color = Color.gray;
 				}
-				Debug.Log ("Blinked " + blinks [currentEffect].lightIntensity.ToString ());
 				isBlinkOn = !isBlinkOn;
 				lastBlinkTime = Time.time;
 			}

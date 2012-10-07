@@ -1,16 +1,23 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\LightEffects.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainMenu.cs">
     <Files>
-      <File FileName="Assets\Scripts\MouseLook.cs" Line="37" Column="77" />
-      <File FileName="Assets\Scripts\Wall.cs" Line="8" Column="12" />
-      <File FileName="Assets\Scripts\PlayerController.cs" Line="6" Column="15" />
-      <File FileName="Assets\Scripts\LightEffects.cs" Line="39" Column="1" />
-      <File FileName="Assets\Scripts\Enemy.cs" Line="16" Column="21" />
+      <File FileName="Assets/Scripts/Enemy.cs" Line="55" Column="17" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="70" Column="43" />
+      <File FileName="Assets/Scripts/LightEffects.cs" Line="11" Column="28" />
+      <File FileName="Assets/Scripts/MainMenu.cs" Line="7" Column="16" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="Assembly-CSharp" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="MainMenu.cs" selected="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True" />

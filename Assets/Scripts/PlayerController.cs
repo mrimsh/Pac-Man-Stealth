@@ -3,12 +3,18 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-	public float moveSpeed = 2f;
+	public float moveSpeed = 1.2F,
+	runSpeed = 2.5F;
 	public float cameraDistanceNormal = -1.5f;
 	public float cameraDistanceOnStick = -2.0f;
-	public float mouseSpeed = 3f;
+	public float mouseSpeed = 6f;
+	public int lives = 3;
+	public AudioClip eat, groan;
+	[HideInInspector]
+	public bool isRunning;
 	private bool isStickedToWall;
 	private Camera playerCamera;
+	private float ballsLeft;
 
 	private float TargetRotation {
 		get {
@@ -30,6 +36,7 @@ public class PlayerController : MonoBehaviour
 	void Start ()
 	{
 		playerCamera = Camera.mainCamera;
+		ballsLeft = GameObject.FindGameObjectsWithTag ("Ball").Length;
 	}
 	
 	// Update is called once per frame
@@ -60,6 +67,9 @@ public class PlayerController : MonoBehaviour
 		} else if (Input.GetButtonDown ("TurnRight")) {
 			TargetRotation += 90;
 		}
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.LoadLevel ("Menu");
+		}
 
 		isStickedToWall = Input.GetButton ("WallStick");
 	}
@@ -69,9 +79,10 @@ public class PlayerController : MonoBehaviour
 		float currentSpeed = 0f;
 		if (isStickedToWall) {
 		} else {
-			currentSpeed = Input.GetAxis ("Vertical") * moveSpeed;
+			currentSpeed = Input.GetAxis ("Vertical") * (Input.GetButton ("Run") ? runSpeed : moveSpeed);
+			isRunning = Input.GetButton ("Run");
 		}
-		rigidbody.velocity = transform.localRotation * Vector3.forward * currentSpeed * 200f * Time.fixedDeltaTime;
+		rigidbody.velocity = transform.forward * currentSpeed * 200f * Time.fixedDeltaTime;
 		
 // Mouse Look Moving
 //
@@ -87,7 +98,27 @@ public class PlayerController : MonoBehaviour
 	void OnTriggerEnter (Collider other)
 	{
 		other.GetComponentInChildren<Renderer> ().material.color = Color.white;
+		audio.clip = eat;
 		audio.Play ();
+		ballsLeft--;
 		Destroy (other.gameObject, 0.2f);
+	}
+	
+	void OnGUI ()
+	{
+		GUI.Label (new Rect (10, 10, 150, 20), "Balls Left: " + ballsLeft);
+		GUI.Label (new Rect (10, 30, 150, 20), "Lives Left: " + lives);
+	}
+	
+	public void Hurt ()
+	{
+		audio.clip = groan;
+		audio.Play ();
+		if (lives > 0) {
+			lives--;
+			transform.localPosition = new Vector3 (18F, 1.5F, 7F);
+		} else {
+			Application.LoadLevel ("Menu");
+		}
 	}
 }
